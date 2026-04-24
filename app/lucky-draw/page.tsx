@@ -92,7 +92,7 @@ export default function LuckyDrawPage() {
           ) : (
             <>
               <p className="eyebrow">抽獎登記</p>
-              <h1 className="headline">登記電郵，<br /><span>贏取獎品。</span></h1>
+              <h1 className="headline">不過是套戲<br /><span style={{color:"rgba(255,255,255,0.25)"}}>MV 抽獎。</span></h1>
               <div className="divider" />
               <form className="form" onSubmit={handleSubmit}>
                 <div className="field">
