@@ -21,155 +21,103 @@ export default function LuckyDrawPage() {
       if (!res.ok) { setError(data.error || "Something went wrong"); }
       else {
         setSuccess(true);
-        const end = Date.now() + 2500;
+        const end = Date.now() + 2200;
         const frame = () => {
-          confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0, y: 0.65 }, colors: ["#a78bfa", "#e879f9", "#818cf8"] });
-          confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1, y: 0.65 }, colors: ["#a78bfa", "#e879f9", "#818cf8"] });
+          confetti({ particleCount: 3, angle: 60, spread: 50, origin: { x: 0, y: 0.6 }, colors: ["#fff", "#aaa", "#666"] });
+          confetti({ particleCount: 3, angle: 120, spread: 50, origin: { x: 1, y: 0.6 }, colors: ["#fff", "#aaa", "#666"] });
           if (Date.now() < end) requestAnimationFrame(frame);
         };
         frame();
       }
-    } catch { setError("Network error, please try again"); }
+    } catch { setError("Network error"); }
     finally { setSubmitting(false); }
   }
 
   return (
     <>
       <style>{`
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body { height: 100%; }
-        body {
-          background: #08060f;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-        .page {
-          min-height: 100svh;
-          background: radial-gradient(ellipse 80% 60% at 30% 20%, rgba(120,40,200,0.18) 0%, transparent 70%),
-                      radial-gradient(ellipse 60% 50% at 75% 70%, rgba(60,40,180,0.12) 0%, transparent 70%),
-                      linear-gradient(160deg, #0c0816 0%, #080612 50%, #060c14 100%);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding: 48px 20px;
-        }
-        .wrap { width: 100%; max-width: 360px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-        .artist { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(167,139,250,0.5); font-weight: 300; }
-        .card {
-          width: 100%;
-          background: linear-gradient(160deg, #1c1430 0%, #130f22 100%);
-          border: 1px solid rgba(167,139,250,0.2);
-          border-radius: 24px;
-          overflow: hidden;
-          box-shadow: 0 32px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.03) inset;
-        }
-        .card-accent { height: 1px; background: linear-gradient(90deg, transparent, rgba(167,139,250,0.5) 40%, rgba(129,140,248,0.5) 60%, transparent); }
-        .card-body { padding: 32px 28px; display: flex; flex-direction: column; gap: 24px; }
-        .card-header { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
-        .icon-wrap {
-          width: 56px; height: 56px; border-radius: 16px;
-          background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(99,102,241,0.15));
-          border: 1px solid rgba(139,92,246,0.25);
-          display: flex; align-items: center; justify-content: center;
-          font-size: 24px;
-        }
-        .card-title { color: #fff; font-size: 22px; font-weight: 600; letter-spacing: 0.02em; }
-        .card-sub { color: rgba(255,255,255,0.3); font-size: 13px; line-height: 1.6; margin-top: 2px; }
-        .form { display: flex; flex-direction: column; gap: 14px; }
-        .field { display: flex; flex-direction: column; gap: 6px; }
-        .label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); font-weight: 500; }
-        .input {
-          width: 100%; padding: 14px 16px; border-radius: 12px;
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.09);
-          color: #fff; font-size: 15px;
-          outline: none; transition: border-color 0.2s;
-          -webkit-appearance: none; appearance: none;
-          caret-color: #a78bfa;
-        }
-        .input::placeholder { color: rgba(255,255,255,0.18); }
-        .input:focus { border-color: rgba(167,139,250,0.45); }
-        .error-box {
-          padding: 12px 16px; border-radius: 12px;
-          background: rgba(239,68,68,0.07);
-          border: 1px solid rgba(239,68,68,0.18);
-          color: rgba(252,165,165,0.85); font-size: 13px;
-          display: flex; align-items: center; gap: 8px;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { height: 100%; }
+        body { height: 100%; background: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; }
+        .page { min-height: 100svh; display: flex; flex-direction: column; padding: 48px 28px 40px; }
+        .top { display: flex; justify-content: space-between; align-items: flex-start; }
+        .logo { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+        .num { font-size: 11px; letter-spacing: 0.1em; color: rgba(255,255,255,0.2); }
+        .main { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px 0 40px; }
+        .eyebrow { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 20px; }
+        .headline { font-size: clamp(38px, 11vw, 56px); font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 40px; }
+        .headline span { color: rgba(255,255,255,0.2); }
+        .divider { height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 40px; }
+        .form { display: flex; flex-direction: column; gap: 0; }
+        .field { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 18px 0; display: flex; flex-direction: column; gap: 6px; transition: border-color 0.2s; }
+        .field:focus-within { border-color: rgba(255,255,255,0.4); }
+        .label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+        .input { background: transparent; border: none; outline: none; color: #fff; font-size: 16px; font-family: inherit; width: 100%; caret-color: #fff; -webkit-appearance: none; }
+        .input::placeholder { color: rgba(255,255,255,0.12); }
+        .error { font-size: 12px; color: rgba(255,80,80,0.8); letter-spacing: 0.03em; padding-top: 14px; }
         .btn {
-          width: 100%; padding: 15px; border-radius: 12px; border: none; cursor: pointer;
-          background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 50%, #4f46e5 100%);
-          color: #fff; font-size: 15px; font-weight: 600; letter-spacing: 0.06em;
-          box-shadow: 0 4px 20px rgba(124,58,237,0.4), 0 1px 0 rgba(255,255,255,0.08) inset;
-          transition: opacity 0.15s, transform 0.1s;
-          margin-top: 4px;
+          margin-top: 36px; width: 100%; padding: 18px 0; background: #fff; color: #000;
+          border: none; border-radius: 0; cursor: pointer;
+          font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+          font-family: inherit; transition: opacity 0.15s, transform 0.1s;
         }
-        .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-        .btn:not(:disabled):active { transform: scale(0.98); }
-        .success { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px 0; text-align: center; }
-        .success-icon {
-          width: 64px; height: 64px; border-radius: 50%;
-          background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(99,102,241,0.1));
-          border: 1px solid rgba(139,92,246,0.2);
-          display: flex; align-items: center; justify-content: center; font-size: 28px;
-        }
-        .success-title { color: #fff; font-size: 20px; font-weight: 600; }
-        .success-sub { color: rgba(255,255,255,0.35); font-size: 14px; margin-top: 2px; }
-        .success-email {
-          padding: 8px 16px; border-radius: 99px; font-size: 12px; font-family: monospace;
-          background: rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.15);
-          color: rgba(167,139,250,0.6);
-        }
-        .footer { font-size: 11px; letter-spacing: 0.15em; color: rgba(255,255,255,0.1); }
+        .btn:disabled { opacity: 0.3; cursor: not-allowed; }
+        .btn:not(:disabled):active { transform: scale(0.99); }
+        .success-wrap { display: flex; flex-direction: column; gap: 16px; }
+        .success-label { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+        .success-headline { font-size: clamp(30px, 9vw, 44px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+        .success-email { font-size: 13px; color: rgba(255,255,255,0.3); font-family: 'SF Mono', 'Fira Code', monospace; margin-top: 8px; word-break: break-all; }
+        .footer { display: flex; justify-content: space-between; align-items: flex-end; }
+        .footer-left { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.15); }
+        .footer-right { font-size: 10px; letter-spacing: 0.1em; color: rgba(255,255,255,0.12); }
       `}</style>
 
       <div className="page">
-        <div className="wrap">
-          <p className="artist">Harry Kwan · 關誌諾</p>
+        {/* Top bar */}
+        <div className="top">
+          <span className="logo">Harry Kwan</span>
+          <span className="num">01</span>
+        </div>
 
-          <div className="card">
-            <div className="card-accent" />
-            <div className="card-body">
-              <div className="card-header">
-                <div className="icon-wrap">🎟</div>
-                <div>
-                  <h1 className="card-title">抽獎登記</h1>
-                  <p className="card-sub">登記電郵，有機會獲得驚喜獎品</p>
-                </div>
-              </div>
-
-              {success ? (
-                <div className="success">
-                  <div className="success-icon">🎉</div>
-                  <div>
-                    <p className="success-title">成功登記！</p>
-                    <p className="success-sub">等待抽獎結果，祝你好運 🍀</p>
-                  </div>
-                  <div className="success-email">{email}</div>
-                </div>
-              ) : (
-                <form className="form" onSubmit={handleSubmit}>
-                  <div className="field">
-                    <label className="label">姓名</label>
-                    <input className="input" type="text" placeholder="你的名字"
-                      value={name} onChange={e => setName(e.target.value)} required />
-                  </div>
-                  <div className="field">
-                    <label className="label">電郵</label>
-                    <input className="input" type="email" placeholder="your@email.com"
-                      value={email} onChange={e => setEmail(e.target.value)} required />
-                  </div>
-                  {error && <div className="error-box"><span>⚠</span>{error}</div>}
-                  <button className="btn" type="submit" disabled={submitting}>
-                    {submitting ? "登記中..." : "立即登記"}
-                  </button>
-                </form>
-              )}
+        {/* Main content */}
+        <div className="main">
+          {success ? (
+            <div className="success-wrap">
+              <div className="divider" />
+              <p className="success-label">登記完成</p>
+              <h1 className="success-headline">已登記。<br /><span style={{color:"rgba(255,255,255,0.25)"}}>祝你好運。</span></h1>
+              <p className="success-email">{email}</p>
+              <div className="divider" style={{marginTop: 24}} />
             </div>
-            <div className="card-accent" />
-          </div>
+          ) : (
+            <>
+              <p className="eyebrow">抽獎登記</p>
+              <h1 className="headline">登記電郵，<br /><span>贏取獎品。</span></h1>
+              <div className="divider" />
+              <form className="form" onSubmit={handleSubmit}>
+                <div className="field">
+                  <label className="label">姓名</label>
+                  <input className="input" type="text" placeholder="你的名字"
+                    value={name} onChange={e => setName(e.target.value)} required />
+                </div>
+                <div className="field">
+                  <label className="label">電郵</label>
+                  <input className="input" type="email" placeholder="your@email.com"
+                    value={email} onChange={e => setEmail(e.target.value)} required />
+                </div>
+                {error && <p className="error">⚠ {error}</p>}
+                <button className="btn" type="submit" disabled={submitting}>
+                  {submitting ? "登記中" : "立即登記"}
+                </button>
+              </form>
+            </>
+          )}
+        </div>
 
-          <p className="footer">kclmusic.com</p>
+        {/* Footer */}
+        <div className="footer">
+          <span className="footer-left">kclmusic.com</span>
+          <span className="footer-right">© 2025</span>
         </div>
       </div>
     </>
